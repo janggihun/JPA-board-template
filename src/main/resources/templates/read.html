@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>게시글 상세보기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body class="bg-gray-100 text-gray-800 flex justify-center items-start min-h-screen pt-20">
+<div class="bg-white p-6 rounded shadow w-full max-w-3xl">
+    <h1 class="text-2xl font-bold text-center mb-6">게시글 상세보기</h1>
+
+    <div class="space-y-4">
+        <!-- 제목 및 게시글 번호 -->
+        <div>
+            <h2 class="text-xl font-semibold border-b pb-2" id="title"></h2>
+            <div class="text-gray-500 text-sm mt-1">번호: [[${boardId}]]</div>
+        </div>
+
+        <!-- 작성자, 날짜, 조회수 -->
+        <div class="flex flex-wrap text-gray-600 text-sm space-x-4">
+            <div id="writer"></div>
+            <div id="insertDate"></div>
+            <div id="view"></div>
+        </div>
+
+        <!-- 내용 -->
+        <textarea id="content" name="content" rows="6" required disabled
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
+
+        <!-- 첨부파일 -->
+        <div>
+            <h3 class="font-medium mb-1">첨부파일</h3>
+            <a href="/uploads/sample.pdf" download
+               class="inline-block text-blue-600 hover:underline">
+                아직누르면 없음.pdf
+            </a>
+        </div>
+        <!-- 댓글 영역 -->
+        <section class="mt-10">
+            <h3 class="text-lg font-semibold mb-4 border-b pb-2">댓글</h3>
+
+            <!-- ✅ 댓글 목록 -->
+            <div id="commentList" class="space-y-6 mb-6">
+                <!-- 댓글 반복 시작 -->
+                <div class="comment border p-4 rounded bg-gray-50" data-comment-id="1">
+                    <div class="text-sm font-semibold">사용자1</div>
+                    <div class="text-gray-800">첫 번째 댓글입니다.</div>
+                    <div class="text-xs text-gray-400 mt-1">2025-06-27</div>
+
+                    <!-- 답글 목록 -->
+                    <div class="pl-4 mt-3 space-y-2 reply-list">
+                        <!-- 답글 반복 -->
+                        <div class="border-l-4 pl-3 text-sm text-gray-700">
+                            <strong>관리자</strong>: 감사합니다!
+                        </div>
+                    </div>
+
+                    <!-- 답글 입력창 -->
+                    <div class="mt-2">
+                        <button onclick="toggleReplyForm(this)" class="text-blue-500 text-sm hover:underline">답글 달기</button>
+                        <div class="mt-2 hidden reply-form">
+                <textarea rows="2" class="w-full border rounded px-2 py-1 text-sm mt-1"
+                          placeholder="답글을 입력하세요"></textarea>
+                            <button class="mt-1 bg-blue-500 text-white text-sm px-3 py-1 rounded">등록</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 댓글 반복 끝 -->
+            </div>
+
+            <!-- ✅ 댓글 작성 입력 -->
+            <div class="space-y-3">
+        <textarea id="comment" name="commentContent" rows="3" placeholder="댓글을 입력하세 요"
+                  class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
+                <button onclick="save_comment()" class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded">
+                    등록
+                </button>
+            </div>
+        </section>
+        <!-- 버튼영역 -->
+        <div class="text-center mt-10 space-x-4" id="btnAria">
+            <a href="/board"
+               class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 px-5 py-2 rounded  cursor-pointer">
+                목록으로
+            </a>
+            <a onclick="check_pw_update()"
+               class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded cursor-pointer">
+                수정
+            </a>
+            <button onclick="delete_post()"
+                    class="inline-block bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded  cursor-pointer">
+                삭제
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    function toggleReplyForm(button) {
+        const form = button.nextElementSibling;
+        form.classList.toggle('hidden');
+    }
+</script>
+<input type="hidden" th:value="${boardId}" id="boardId"/>
+<script defer src="/js/common.js"></script>
+<script defer src="/js/read.js"></script>
+</body>
+</html>

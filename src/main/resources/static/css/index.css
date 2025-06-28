@@ -1,0 +1,45 @@
+.Base_container {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 1900px;
+    height: 900px;
+    font-family: "Freesentation-9Black";
+
+
+    /* background-color: gray; */
+}
+
+.w-btn-gray-outline {
+    border: 3px solid #a3a1a1;
+    color: #6e6e6e;
+}
+.w-btn-gray-outline:hover {
+    background-color: #a3a1a1;
+    color: #e3dede;
+}
+.sort {
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.categorySelect {
+    border-radius: 15px;
+    background-color: #000;
+    color: white;
+}
+
+.category {
+    border-radius: 15px;
+}
+
+.category:hover {
+    transition: all 0.3s;
+    border-radius: 15px;
+    background-color: #000;
+    color: white;
+
+
+}
